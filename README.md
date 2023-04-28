@@ -27,6 +27,10 @@ class Seeder extends BaseSeeder {
   @InjectService(UserService)
   private service: UserService
 
+  // or
+  // @InjectService() // auto inject the type you declare
+  // private service: UserService
+
   async run() {
     this.service......
   }
