@@ -1,93 +1,26 @@
 # Adonis Repository
 
-adonisjs lucid is very strong, but it do too much and hard to extend, so i refer nestJs's repository, and build this to share model responsibility
-
-## 📦 Installing
-
-Simply run the following commands on your shell
-
-```bash
-npm install @lu7766lu7766/adonis-repository
-node ace invoke @lu7766lu7766/adonis-repository
-```
+adonisjs some tools
 
 ## 📌 Example
 
-> Inject in constructor
+> Inject service in class
+>
+> > you can use inject to instead this case in normal situation, but there are some exceptions etc: seeders, so you can use this
 
 ```ts
-// Controller.ts
-import { inject } from "@adonisjs/fold"
-import { InjectRepository, Repository } from "@ioc:Adonis/Repository"
-import User from "App/Models/User"
-@inject()
-class Controller {
-  constructor(@InjectRepository(User) private repo: Repository<typeof User>) {}
-}
-```
+// seeders/index.ts
+import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
+import { InjectService } from "@ioc:Adonis/Repository"
+import UserService from "App/Service/UserService"
 
-> Inject in class
+class Seeder extends BaseSeeder {
+  @InjectService(UserService)
+  private service: UserService
 
-```ts
-// Controller.ts
-import { InjectRepository, Repository } from "@ioc:Adonis/Repository"
-import User from "App/Models/User"
-class Controller {
-  @InjectRepository(User)
-  private repo: Repository<typeof User>
-}
-```
-
-> features
-
-```ts
-// Controller.ts
-import { inject } from "@adonisjs/fold"
-import { InjectRepository, Repository } from "@ioc:Adonis/Repository"
-import User from "App/Models/User"
-@inject()
-class Controller {
-  constructor(@InjectRepository(User) private repo: Repository<typeof User>) {}
-
-  getList() {
-    return this.repo
-      .query()
-      .pager({ page: 1; perPage: 20 })
-      .sort({ sortKey: "created_ad"; sortType: "desc" })
-      .condiction({
-        id: [1, 3, 5, 7], // whereIn("id", [1, 3, 5, 7])
-        is_active: true, // where("is_active", true)
-        subQuery(query) {
-          // custom query
-        },
-      })
+  async run() {
+    this.service......
   }
-
-  getTotal() {
-    return this.repo.getTotal() // select count(*) from users // reutrn number
-  }
-
-  getOne() {
-    return this.repo.find(5) // select * from users where id = 5
-  }
-
-  query() {
-    return this.repo.query() // same as User.query
-  }
-
-  // findFail
-  // findBy
-  // findByOrFail
-  // firstOrCreate
-  // create
-  // createMany
-  // updateOrCreate
-  // updateOrCreateManyByKey
-  // merge
-  // save
-  // mergeSave
-  // delete
-  // deleteBy
 }
 ```
 
