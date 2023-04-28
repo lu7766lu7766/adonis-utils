@@ -2,6 +2,15 @@
 
 adonisjs some tools
 
+## 📦 Installing
+
+Simply run the following commands on your shell
+
+```bash
+npm install @lu7766lu7766/adonis-utils
+node ace invoke @lu7766lu7766/adonis-utils
+```
+
 ## 📌 Example
 
 > Inject service in class

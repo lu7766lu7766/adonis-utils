@@ -22,7 +22,9 @@
   ],
   "adonisjs": {
     "types": "@lu7766lu7766/adonis-utils",
-    "providers": []
+    "providers": [
+      "@lu7766lu7766/adonis-utils"
+    ]
   },
   "author": "Jac",
   "license": "ISC",
